@@ -24,9 +24,17 @@ img {
   --white: #fff;
   --black: #000;
   --blue: #071351;
+  --blue-light: #3d397e;
+  --blue-dark: #000029;
   --green: #5cff85;
+  --green-light: #97ffb6;
+  --green-dark: #00cb56;
   --red: #d52200;
-  --facebook-blue: #2d9bf0;
+  --red-light: #ff5d32;
+  --red-dark: #9b0000;
+  --meta-blue: #2d9bf0;
+  --meta-blue-light: #73ccff;
+  --meta-blue-dark: #006dbd;
   --border-r: 10px;
   --transition: all 0.1s cubic-bezier(0.25, 0.25, 0.25, 0.25);
   --base-font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;

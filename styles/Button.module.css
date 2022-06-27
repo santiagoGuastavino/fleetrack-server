@@ -7,11 +7,24 @@
   font-weight: 600;
   line-height: normal;
   font-size: 18px;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
-.create {
+.create,
+.switch {
   color: var(--black);
   background-color: var(--green);
+}
+
+.create:hover,
+.switch:hover {
+  background-color: var(--green-light);
+}
+
+.create:focus,
+.switch:focus {
+  outline: var(--green-dark) 2px solid;
 }
 
 .google {
@@ -19,14 +32,28 @@
   background-color: var(--red);
 }
 
+.google:hover {
+  background-color: var(--red-light);
+}
+
+.google:focus {
+  outline: var(--red-dark) 2px solid;
+}
+
 .meta {
   color: var(--white);
-  background-color: var(--facebook-blue);
+  background-color: var(--meta-blue);
+}
+
+.meta:hover {
+  background-color: var(--meta-blue-light);
+}
+
+.meta:focus {
+  outline: var(--meta-blue-dark) 2px solid;
 }
 
 .switch {
-  color: var(--black);
-  background-color: var(--green);
   margin-top: 35px;
   width: 70%;
 }

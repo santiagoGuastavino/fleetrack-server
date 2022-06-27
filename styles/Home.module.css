@@ -84,7 +84,8 @@
   font-size: 18px;
 }
 
-.inputBox input:focus {
+.inputBox input:focus,
+.inputBoxHalf input:focus {
   outline: 2px solid var(--red);
 }
 
