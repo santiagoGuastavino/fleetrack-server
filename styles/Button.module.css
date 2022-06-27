@@ -1,0 +1,48 @@
+.button {
+  width: 100%;
+  padding: 15px;
+  border-radius: var(--border-r);
+  border: none;
+  margin: 8px 0;
+  font-weight: 600;
+  line-height: normal;
+  font-size: 18px;
+}
+
+.create {
+  color: var(--black);
+  background-color: var(--green);
+}
+
+.google {
+  color: var(--white);
+  background-color: var(--red);
+}
+
+.meta {
+  color: var(--white);
+  background-color: var(--facebook-blue);
+}
+
+.switch {
+  color: var(--black);
+  background-color: var(--green);
+  margin-top: 35px;
+  width: 70%;
+}
+
+@media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+}

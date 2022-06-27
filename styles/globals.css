@@ -1,9 +1,13 @@
-html,
-body {
+* {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+html,
+body {
+  font-family: var(--base-font);
+  color: var(--white);
 }
 
 a {
@@ -11,6 +15,35 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+img {
+  display: block;
+  width: 100%;
+}
+
+:root {
+  --white: #fff;
+  --black: #000;
+  --blue: #071351;
+  --green: #5cff85;
+  --red: #d52200;
+  --facebook-blue: #2d9bf0;
+  --border-r: 10px;
+  --transition: all 0.1s cubic-bezier(0.25, 0.25, 0.25, 0.25);
+  --base-font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+@media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
 }
