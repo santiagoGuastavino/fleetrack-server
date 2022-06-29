@@ -7,7 +7,8 @@ export default function Button (props) {
       className={styles.button + ' ' + styles[props.classname]}
       onClick={props.f}
     >
-      {props.text}
+      {props.login && props.text}
+      {props.register && props.altText}
     </button>
   )
 }

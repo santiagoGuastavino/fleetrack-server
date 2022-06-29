@@ -36,68 +36,6 @@
   margin: 20px 0;
 }
 
-.form {
-  width: 70%;
-}
-
-.form {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-}
-
-.inputBox {
-  width: 100%;
-}
-
-.inputBoxHalf {
-  width: 48%;
-}
-
-.inputBox {
-  padding: 8px 0;
-}
-
-.inputBox label,
-.inputBoxHalf label {
-  display: block;
-  width: 100%;
-  text-indent: 10px;
-  font-family: inherit;
-  padding-bottom: 4px;
-  font-weight: 500;
-  font-size: 18px;
-}
-
-.inputBox input,
-.inputBoxHalf input {
-  padding: 14px 4px;
-  border: none;
-  width: 100%;
-  border-radius: var(--border-r);
-  text-indent: 5px;
-  font-family: inherit;
-  outline: 2px solid var(--green);
-  transition: var(--transition);
-  font-size: 18px;
-}
-
-.inputBox input:focus,
-.inputBoxHalf input:focus {
-  outline: 2px solid var(--red);
-}
-
-.buttonBox {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
-  width: 70.5%;
-  margin-top: 35px;
-}
-
 @media (min-width: 576px) {
 
 }

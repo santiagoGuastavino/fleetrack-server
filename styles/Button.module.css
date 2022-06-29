@@ -11,18 +11,18 @@
   transition: var(--transition);
 }
 
-.create,
+.simple,
 .switch {
   color: var(--black);
   background-color: var(--green);
 }
 
-.create:hover,
+.simple:hover,
 .switch:hover {
   background-color: var(--green-light);
 }
 
-.create:focus,
+.simple:focus,
 .switch:focus {
   outline: var(--green-dark) 2px solid;
 }
