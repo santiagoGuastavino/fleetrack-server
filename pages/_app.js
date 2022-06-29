@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import { useMemo, useState } from 'react'
-import { UserContext } from '../context/UserContext'
+import { UserContext } from '../context/userContext'
 
 export default function App ({ Component, pageProps }) {
   const [user, setUser] = useState(null)
