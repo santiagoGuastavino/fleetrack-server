@@ -1,6 +1,6 @@
 import styles from '../../styles/Auth.module.css'
 import { useState } from 'react'
-import Button from '../Button'
+import Button from '../Auth/Button'
 
 const INITIAL_DATA = {
   name: '',
