@@ -6,13 +6,19 @@
 }
 
 .aside {
+  display: none;
   width: 15%;
   height: 100vh;
   background-color: var(--blue);
 }
 
 .imgBox {
-  padding: 30px;
+  padding: 10%;
+  min-height: 7vh;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .linkBox {
@@ -22,12 +28,17 @@
 }
 
 .linkBox li {
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
+  background-color: red;
+}
+
+.linkBox li p {
+  text-align: center;
 }
 
 .section {
-  width: 85%;
+  width: 100%;
   height: 100vh;
 }
 
@@ -38,7 +49,18 @@
 }
 
 @media (min-width: 576px) {
+  .aside {
+    display: block;
+  }
 
+  .linkBox li {
+    font-size: 12px;
+    height: 5vh;
+  }
+
+  .section {
+    width: 85%;
+  }
 }
 
 @media (min-width: 768px) {

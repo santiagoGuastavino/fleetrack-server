@@ -15,11 +15,11 @@ export default function Main () {
             <img src='images/logo.png' />
           </div>
           <ul className={styles.linkBox}>
-            <li>Resumen</li>
-            <li>Clientes</li>
-            <li>Propiedades</li>
-            <li>Documentos</li>
-            <li>Mensajes</li>
+            <li><p>Resumen</p></li>
+            <li><p>Clientes</p></li>
+            <li><p>Propiedades</p></li>
+            <li><p>Documentos</p></li>
+            <li><p>Mensajes</p></li>
           </ul>
         </aside>
         <section className={styles.section}>
