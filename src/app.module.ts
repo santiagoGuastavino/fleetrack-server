@@ -5,6 +5,7 @@ import { AuthModule } from './resources/auth/auth.module';
 import { UsersModule } from './resources/users/users.module';
 import { I18nModule } from './i18n/i18n.module';
 import { ListsModule } from './resources/lists/lists.module';
+import { ItemsModule } from './resources/items/items.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ListsModule } from './resources/lists/lists.module';
     AuthModule,
     UsersModule,
     ListsModule,
+    ItemsModule,
   ],
 })
 export class AppModule {}

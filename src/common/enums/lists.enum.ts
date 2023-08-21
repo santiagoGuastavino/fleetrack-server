@@ -1,4 +1,4 @@
 export enum Lists {
-  SHOP = 'shop',
-  TO_DO = 'to-do',
+  SHOP = 'SHOP',
+  TO_DO = 'TO-DO',
 }

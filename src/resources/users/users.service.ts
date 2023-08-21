@@ -7,7 +7,9 @@ import { SaveUserDto } from './dtos/save-user.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private usersModel: Model<User>) {}
+  constructor(
+    @InjectModel(User.name) private readonly usersModel: Model<User>,
+  ) {}
 
   public async findOne(filter: FilterQuery<User>): Promise<IUser> {
     return await this.usersModel.findOne(filter).lean();
@@ -17,7 +19,7 @@ export class UsersService {
     return await this.usersModel.create(payload);
   }
 
-  public async updateOne(
+  public async updateOneAndReturn(
     filter: FilterQuery<User>,
     update: UpdateQuery<User>,
   ): Promise<IUser> {

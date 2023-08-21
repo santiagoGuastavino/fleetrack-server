@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { I18nContext } from 'nestjs-i18n';
 
-type Entities = 'user';
+type Entities = 'user' | 'list';
 
 export class NotFoundException extends HttpException {
   constructor(i18n: I18nContext, entity: Entities) {

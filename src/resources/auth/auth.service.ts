@@ -18,7 +18,7 @@ import { RefreshAccessTokenDto } from './dtos/request/refresh-access-token.dto';
 import { CredentialsExpiredException } from './exceptions/credentials-expired.exception';
 import { ObjectId } from 'mongodb';
 import { WrongCodeException } from './exceptions/wrong-code.exception';
-import { SetForgottenPasswordDto } from './dtos/request/set-forgotten-password.dto';
+import { ChangePasswordWithCodeDto } from './dtos/request/change-password-with-code.dto';
 import { SamePasswordException } from './exceptions/same-password.exception';
 import { SendCodeDto } from './dtos/request/send-code.dto';
 import { FilterQuery } from 'mongoose';
@@ -127,7 +127,7 @@ export class AuthService {
     if (this.refreshTokenExpired(timestamp, now))
       throw new CredentialsExpiredException(i18n);
 
-    await this.usersService.updateOne(
+    await this.usersService.updateOneAndReturn(
       { _id: userToRenewCredentials._id },
       { lastRefreshToken: now },
     );
@@ -149,8 +149,8 @@ export class AuthService {
     return response;
   }
 
-  public async setForgottenPassword(
-    payload: SetForgottenPasswordDto,
+  public async changePasswordWithCode(
+    payload: ChangePasswordWithCodeDto,
     i18n: I18nContext,
   ): Promise<ResponseDto<object>> {
     const response = new ResponseDto<object>(HttpStatus.OK, ResponseMessage.OK);
@@ -160,10 +160,7 @@ export class AuthService {
     });
 
     if (!userToRenewPassword) throw new NotFoundException(i18n, 'user');
-    if (
-      userToRenewPassword.passwordRecoveryCode !==
-      Number(payload.passwordRecoveryCode)
-    )
+    if (userToRenewPassword.passwordRecoveryCode !== Number(payload.code))
       throw new WrongCodeException(i18n, 'passwordRecoveryCode');
 
     const passwordsMatch: boolean = await this.matchPasswords(
@@ -177,7 +174,7 @@ export class AuthService {
 
     const newCode = this.generateRandomNumber();
 
-    await this.usersService.updateOne(
+    await this.usersService.updateOneAndReturn(
       { _id: userToRenewPassword._id },
       {
         password: hashedPassword,
@@ -191,7 +188,6 @@ export class AuthService {
   public async sendCode(
     payload: SendCodeDto,
     i18n: I18nContext,
-    requestedCode: 'password-recovery',
   ): Promise<ResponseDto<object>> {
     const response = new ResponseDto<object>(HttpStatus.OK, ResponseMessage.OK);
 
@@ -205,12 +201,12 @@ export class AuthService {
     const update: FilterQuery<User> = {};
     update.passwordRecoveryCode = newCode;
 
-    const updatedUser: IUser = await this.usersService.updateOne(
+    const updatedUser: IUser = await this.usersService.updateOneAndReturn(
       { _id: userRequiringCode._id },
       update,
     );
 
-    await this.emailService.sendAuthEmail(updatedUser, requestedCode);
+    await this.emailService.sendAuthEmail(updatedUser, 'password-recovery');
 
     return response;
   }
@@ -236,7 +232,7 @@ export class AuthService {
     const hashedPassword: string = await this.hashPassword(payload.password);
     const newCode: number = this.generateRandomNumber();
 
-    await this.usersService.updateOne(
+    await this.usersService.updateOneAndReturn(
       { _id: userToChangePassword._id },
       {
         password: hashedPassword,
@@ -268,7 +264,7 @@ export class AuthService {
     const accessToken: string = this.generateAccessToken(jwtPayload);
     const refreshToken: string = this.generateRefreshToken(jwtPayload, now);
 
-    await this.usersService.updateOne(
+    await this.usersService.updateOneAndReturn(
       { _id: user._id },
       { lastRefreshToken: now },
     );

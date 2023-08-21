@@ -11,6 +11,5 @@ import { EmailModule } from 'src/services/email/email.module';
   imports: [JwtModule, UsersModule, PassportModule, EmailModule],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
-  exports: [AuthService],
 })
 export class AuthModule {}

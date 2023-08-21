@@ -4,5 +4,6 @@
   "WRONG_PASSWORD": "Invalid password. Password doesn't match.",
   "CREDENTIALS_EXPIRED": "The provided refresh token has expired.",
   "WRONG_CODE": "The provided value for {property} doesn't match",
-  "SAME_PASSWORD": "The provided password is the same as the old one."
+  "SAME_PASSWORD": "The provided password is the same as the old one.",
+  "FORBIDDEN": "You do not have permission to perform {action} on the requested resource ({entity})."
 }

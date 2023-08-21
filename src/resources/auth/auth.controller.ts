@@ -11,7 +11,7 @@ import { I18n } from 'nestjs-i18n/dist/decorators/i18n.decorator';
 import { I18nContext } from 'nestjs-i18n/dist/i18n.context';
 import { ResponseDto } from 'src/common/dtos/response.dto';
 import { LoginDto } from './dtos/request/login.dto';
-import { SetForgottenPasswordDto } from './dtos/request/set-forgotten-password.dto';
+import { ChangePasswordWithCodeDto } from './dtos/request/change-password-with-code.dto';
 import { SignupDto } from './dtos/request/signup.dto';
 import { AuthService } from './auth.service';
 import { RefreshAccessTokenDto } from './dtos/request/refresh-access-token.dto';
@@ -75,15 +75,15 @@ export class AuthController {
     }
   }
 
-  @Post('set-forgotten-password')
+  @Post('change-password-with-code')
   @HttpCode(HttpStatus.OK)
-  async setForgottenPassword(
-    @Body() payload: SetForgottenPasswordDto,
+  async changePasswordWithCode(
+    @Body() payload: ChangePasswordWithCodeDto,
     @I18n() i18n: I18nContext,
   ): Promise<ResponseDto<object>> {
     try {
       const response: ResponseDto<object> =
-        await this.authService.setForgottenPassword(payload, i18n);
+        await this.authService.changePasswordWithCode(payload, i18n);
 
       return response;
     } catch (error) {
@@ -101,7 +101,6 @@ export class AuthController {
       const response: ResponseDto<object> = await this.authService.sendCode(
         payload,
         i18n,
-        'password-recovery',
       );
 
       return response;

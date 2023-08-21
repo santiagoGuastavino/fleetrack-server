@@ -58,7 +58,7 @@ export class EmailService {
     });
 
     const mailOptions = {
-      from: `harkentrack<${process.env.MAIL_FROM}>`,
+      from: `fleetrack<${process.env.MAIL_FROM}>`,
       to: this.recipient.toLowerCase(),
       subject: this.emailData.subject,
       html: compiledTemplate(this.emailData),
