@@ -73,12 +73,31 @@ export class ListsService {
     return response;
   }
 
+  public async getListsByUser(
+    jwtPayload: JwtPayload,
+  ): Promise<ResponseDto<IList[]>> {
+    const response = new ResponseDto<IList[]>(
+      HttpStatus.OK,
+      ResponseMessage.OK,
+    );
+
+    const listsByUser: IList[] = await this.findMany({ user: jwtPayload._id });
+
+    response.payload = listsByUser;
+
+    return response;
+  }
+
   private async insert(payload: SaveListDto): Promise<void> {
     await this.listsModel.create(payload);
   }
 
-  private async findOne(filter: FilterQuery<List>): Promise<IList> {
+  public async findOne(filter: FilterQuery<List>): Promise<IList> {
     return await this.listsModel.findOne(filter).lean();
+  }
+
+  private async findMany(filter: FilterQuery<List>): Promise<IList[]> {
+    return await this.listsModel.find(filter).lean();
   }
 
   private async updateOne(

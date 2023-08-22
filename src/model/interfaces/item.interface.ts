@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 
-export interface IList {
+export interface IItem {
   _id: ObjectId;
   name: string;
   done: boolean;

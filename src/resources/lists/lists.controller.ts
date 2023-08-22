@@ -8,6 +8,8 @@ import {
   Req,
   Patch,
   Delete,
+  Get,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ListsService } from './lists.service';
 import { ResponseDto } from 'src/common/dtos/response.dto';
@@ -17,6 +19,8 @@ import { CreateListDto } from './dtos/request/create-list.dto';
 import { RenameListDto } from './dtos/request/rename-list.dto';
 import { I18n, I18nContext } from 'nestjs-i18n';
 import { DeleteListDto } from './dtos/request/delete-list.dto';
+import { IList } from 'src/model/interfaces/list.interface';
+import { UserExistsInterceptor } from 'src/common/interceptors/user-exists.interceptor';
 
 @Controller('lists')
 export class ListsController {
@@ -25,6 +29,7 @@ export class ListsController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @UseGuards(JwtAuthGuard)
+  @UseInterceptors(UserExistsInterceptor)
   async createList(
     @Body() payload: CreateListDto,
     @Req() req: any,
@@ -46,6 +51,7 @@ export class ListsController {
   @Patch()
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtAuthGuard)
+  @UseInterceptors(UserExistsInterceptor)
   async renameList(
     @Body() payload: RenameListDto,
     @Req() req: any,
@@ -69,6 +75,7 @@ export class ListsController {
   @Delete()
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtAuthGuard)
+  @UseInterceptors(UserExistsInterceptor)
   async deleteList(
     @Body() payload: DeleteListDto,
     @Req() req: any,
@@ -82,6 +89,23 @@ export class ListsController {
         jwtPayload,
         i18n,
       );
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(UserExistsInterceptor)
+  async getListsByUser(@Req() req: any): Promise<ResponseDto<IList[]>> {
+    const jwtPayload: JwtPayload = req.user;
+
+    try {
+      const response: ResponseDto<IList[]> =
+        await this.listsService.getListsByUser(jwtPayload);
 
       return response;
     } catch (error) {
