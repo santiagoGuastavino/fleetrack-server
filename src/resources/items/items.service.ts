@@ -5,9 +5,13 @@ import { IItem } from 'src/model/interfaces/item.interface';
 import { Item } from 'src/model/schemas/item.schema';
 import { SaveItemDto } from './dtos/save-item.dto';
 import { CreateItemDto } from './dtos/request/create-item.dto';
-import { JwtPayload } from 'src/common/interfaces/jwt-payload.interface';
-import { I18nContext } from 'nestjs-i18n';
 import { ResponseDto, ResponseMessage } from 'src/common/dtos/response.dto';
+import { RenameItemDto } from './dtos/request/rename-item.dto';
+import { NotFoundException } from 'src/common/exceptions/not-found.exception';
+import { I18nContext } from 'nestjs-i18n';
+import { DeleteItemDto } from './dtos/request/delete-item.dto';
+import { GetItemsByListDto } from './dtos/request/get-items-by-list.dto';
+import { ChangeItemStatusDto } from './dtos/request/change-item-status.dto';
 
 @Injectable()
 export class ItemsService {
@@ -17,19 +21,78 @@ export class ItemsService {
 
   public async createItem(
     payload: CreateItemDto,
-    jwtPayload: JwtPayload,
-    i18n: I18nContext,
   ): Promise<ResponseDto<object>> {
     const response = new ResponseDto<object>(
       HttpStatus.CREATED,
       ResponseMessage.CREATED,
     );
 
-    // const userToCreateList: IUser = await this.usersService.findOne({
-    //   _id: jwtPayload._id,
-    // });
+    const newItem = new SaveItemDto(payload.name, payload.list);
 
-    // if (!userToCreateList) throw new NotFoundException(i18n, 'user');
+    await this.insert(newItem);
+
+    return response;
+  }
+
+  public async renameItem(
+    payload: RenameItemDto,
+    i18n: I18nContext,
+  ): Promise<ResponseDto<object>> {
+    const response = new ResponseDto<object>(HttpStatus.OK, ResponseMessage.OK);
+
+    const itemToUpdate = await this.findOne({ _id: payload._id });
+
+    if (!itemToUpdate) throw new NotFoundException(i18n, 'item');
+
+    await this.updateOne({ _id: itemToUpdate._id }, { name: payload.name });
+
+    return response;
+  }
+
+  public async deleteItem(
+    payload: DeleteItemDto,
+    i18n: I18nContext,
+  ): Promise<ResponseDto<object>> {
+    const response = new ResponseDto<object>(HttpStatus.OK, ResponseMessage.OK);
+
+    const itemToUpdate = await this.findOne({ _id: payload._id });
+
+    if (!itemToUpdate) throw new NotFoundException(i18n, 'item');
+
+    await this.deleteOne({ _id: payload._id });
+
+    return response;
+  }
+
+  public async getItemsByList(
+    payload: GetItemsByListDto,
+  ): Promise<ResponseDto<IItem[]>> {
+    const response = new ResponseDto<IItem[]>(
+      HttpStatus.OK,
+      ResponseMessage.OK,
+    );
+
+    const itemsByList: IItem[] = await this.findMany({ list: payload.list });
+
+    response.payload = itemsByList;
+
+    return response;
+  }
+
+  public async changeItemStatus(
+    payload: ChangeItemStatusDto,
+    i18n: I18nContext,
+  ): Promise<ResponseDto<object>> {
+    const response = new ResponseDto<object>(HttpStatus.OK, ResponseMessage.OK);
+
+    const itemToUpdate = await this.findOne({ _id: payload._id });
+
+    if (!itemToUpdate) throw new NotFoundException(i18n, 'item');
+
+    await this.updateOne(
+      { _id: itemToUpdate._id },
+      { done: !itemToUpdate.done },
+    );
 
     return response;
   }
@@ -49,7 +112,7 @@ export class ItemsService {
   private async updateOne(
     filter: FilterQuery<Item>,
     update: UpdateQuery<Item>,
-  ) {
+  ): Promise<void> {
     await this.itemsModel.findOneAndUpdate(filter, update, {
       returnOriginal: false,
     });

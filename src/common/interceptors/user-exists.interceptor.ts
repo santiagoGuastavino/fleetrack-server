@@ -4,9 +4,9 @@ import {
   HttpException,
   Injectable,
   NestInterceptor,
+  HttpStatus,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { HttpStatus } from '@nestjs/common';
 import { UsersService } from 'src/resources/users/users.service';
 import { IUser } from 'src/model/interfaces/user.interface';
 import { JwtPayload } from '../interfaces/jwt-payload.interface';

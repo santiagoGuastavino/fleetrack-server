@@ -42,7 +42,7 @@ export class ListsService {
   ): Promise<ResponseDto<object>> {
     const response = new ResponseDto<object>(HttpStatus.OK, ResponseMessage.OK);
 
-    const listToUpdate = await this.findOne({ _id: payload.id });
+    const listToUpdate = await this.findOne({ _id: payload._id });
 
     if (!listToUpdate) throw new NotFoundException(i18n, 'list');
 
@@ -61,7 +61,7 @@ export class ListsService {
   ): Promise<ResponseDto<object>> {
     const response = new ResponseDto<object>(HttpStatus.OK, ResponseMessage.OK);
 
-    const listToDelete = await this.findOne({ _id: payload.id });
+    const listToDelete = await this.findOne({ _id: payload._id });
 
     if (!listToDelete) throw new NotFoundException(i18n, 'list');
 
@@ -103,7 +103,7 @@ export class ListsService {
   private async updateOne(
     filter: FilterQuery<List>,
     update: UpdateQuery<List>,
-  ) {
+  ): Promise<void> {
     await this.listsModel.findOneAndUpdate(filter, update, {
       returnOriginal: false,
     });
