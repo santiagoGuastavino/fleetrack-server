@@ -4,6 +4,9 @@
   "author": "Santiago Guastavino",
   "private": true,
   "license": "UNLICENSED",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
