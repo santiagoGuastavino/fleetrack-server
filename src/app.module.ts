@@ -6,6 +6,8 @@ import { UsersModule } from './resources/users/users.module';
 import { I18nModule } from './i18n/i18n.module';
 import { ListsModule } from './resources/lists/lists.module';
 import { ItemsModule } from './resources/items/items.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -21,5 +23,7 @@ import { ItemsModule } from './resources/items/items.module';
     ListsModule,
     ItemsModule,
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
