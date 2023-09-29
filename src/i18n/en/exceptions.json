@@ -1,7 +1,7 @@
 {
   "ALREADY_EXISTS": "The provided {property} is already in use.",
   "NOT_FOUND": "The provided {entity} was not found.",
-  "WRONG_PASSWORD": "Invalid password. Password doesn't match.",
+  "WRONG_PASSWORD": "Invalid password. Passwords don't match.",
   "CREDENTIALS_EXPIRED": "The provided refresh token has expired.",
   "WRONG_CODE": "The provided value for {property} doesn't match",
   "SAME_PASSWORD": "The provided password is the same as the old one.",
